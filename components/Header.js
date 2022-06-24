@@ -20,6 +20,7 @@ const headerStyles = css`
     justify-content: space-between;
     gap: 4px;
     text-decoration: none;
+    margin-right: 10px;
   }
 
   a {
@@ -42,7 +43,7 @@ export default function Header() {
           src="logo.png"
           alt="temporary logo"
           width="70"
-        ></img>
+        />
         <ul>
           <Link href="/" text-decoration="none">
             Home
