@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
+import { isPropertySignature } from 'typescript';
 import Head from '../node_modules/next/head';
 import { LoginResponseBody } from './api/login';
 
-// type Props = {
-//   refreshUserProfile: () => Promise<void>;
-// };
+type Props = {
+  refreshUserProfile: () => Promise<void>;
+};
 
-export default function Login() {
+export default function Login(props: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<
@@ -51,17 +52,13 @@ export default function Login() {
       // (because this is untrusted user input)
       /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
     ) {
-      // await props.refreshUserProfile();
-      // await router.push(returnTo);
+      await props.refreshUserProfile();
+      await router.push(returnTo);
     } else {
-      // redirect user to user profile
-      // if you want to use userProfile with username redirect to /users/username
-      await router.push(`/users/${loginResponseBody.user.id}`);
-      // await props.refreshUserProfile();
-      // await router.push(`/`);
+      // await router.push(`/users/${loginResponseBody.user.id}`);
+      await props.refreshUserProfile();
+      await router.push(`/`);
     }
-
-    // if we have an error ( errors is an array of objects and sends a message, there can be multiple errors)
   }
 
   return (
@@ -90,7 +87,7 @@ export default function Login() {
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <button onClick={() => loginHandler()}>Register</button>
+        <button onClick={() => loginHandler()}>Login</button>
         {errors.map((error) => (
           <div key={`error-${error.message}`}>{error.message}</div>
         ))}

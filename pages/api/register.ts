@@ -1,6 +1,12 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, getUserByNameAndEmail } from '../../util/database';
+import { createSerializedRegisterSessionTokenCookie } from '../../util/cookies';
+import {
+  createSession,
+  createUser,
+  getUserByNameAndEmail,
+} from '../../util/database';
 
 // response is an array of objects that contains the errors.
 // response is an object with an errors property that contains an array of objects that contain a message
@@ -78,8 +84,22 @@ export default async function handler(
     const newUser = await createUser(firstName, lastName, email, hashPassword);
     console.log('new user: ', newUser);
 
-    // when we request we attach the body of data and get the data from there
-    res.status(200).json({ user: { id: newUser.id } });
+    // TODO create a session for the user
+    // 1. get token
+    const token = crypto.randomBytes(80).toString('base64');
+    // 2. create a function to put token in database
+    const session = await createSession(token, newUser.id);
+    // 3. get serialized cookie
+    const serializedCookie = await createSerializedRegisterSessionTokenCookie(
+      session.token,
+    );
+
+    // if you want to use username as identifier return the username too
+    res
+      .status(200)
+      // Tells the browser to create the cookie for us
+      .setHeader('set-Cookie', serializedCookie)
+      .json({ user: { id: newUser.id } });
   } else {
     res.status(405).json({ errors: [{ message: 'method not allowed' }] });
   }

@@ -1,7 +1,7 @@
 // import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getUserById, User } from '../../util/database';
+import { getUserByValidSessionToken, User } from '../../util/database';
 
 type Props = {
   user?: User;
@@ -41,23 +41,23 @@ export default function Profile(props: Props) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const userIdFromUrl = context.query.userId;
-
-  // if it exist and if it does not return empty array
-  if (!userIdFromUrl || Array.isArray(userIdFromUrl)) {
-    return { props: {} };
+  // context, request, cookies, name of cookie
+  // console.log('session token: ', context.req.cookies.sessionToken);
+  const user = await getUserByValidSessionToken(
+    context.req.cookies.sessionToken,
+  );
+  if (user) {
+    return {
+      props: {
+        user: user,
+      },
+    };
   }
-
-  const userWithId = await getUserById(parseInt(userIdFromUrl));
-
-  if (!userWithId) {
-    context.res.statusCode = 404;
-    return { props: {} };
-  }
-
+  // if user with session token redirect to private profile once logged in
   return {
-    props: {
-      user: userWithId,
+    redirect: {
+      destination: `/login?returnTo=/users/private-profile`,
+      permanent: false,
     },
   };
 }

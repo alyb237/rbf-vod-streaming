@@ -16,7 +16,7 @@ const headerStyles = css`
   ul {
     list-style: none;
     display: flex;
-    color: black;
+    color: #99f442;
     justify-content: space-between;
     gap: 4px;
     text-decoration: none;
@@ -40,7 +40,7 @@ const headerStyles = css`
   }
 `;
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header css={headerStyles}>
       <div className="divWrapper">
@@ -55,20 +55,26 @@ export default function Header() {
           <Link href="/" text-decoration="none">
             Home
           </Link>
-
-          <Link href="/register" text-decoration="none">
-            Register
+          <Link href="/users/private-profile" text-decoration="none">
+            Profile
           </Link>
-
-          <Link href="/login" text-decoration="none">
-            Login
-          </Link>
-
-          <Link href="/register" text-decoration="none">
+          <Link href="/logout" text-decoration="none">
             Logout
           </Link>
         </ul>
       </div>
+      {props.user && (
+        <Link href="/users/private-profile">{props.user.firstName}</Link>
+      )}
+      {props.user ? (
+        // using a instead of Link since we want to force a full refresh
+        <a href="/logout">Logout</a>
+      ) : (
+        <>
+          <Link href="/register">Register</Link>
+          <Link href="/login">Login</Link>
+        </>
+      )}
     </header>
   );
 }

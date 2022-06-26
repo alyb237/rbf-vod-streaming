@@ -4,7 +4,11 @@ import { useState } from 'react';
 import Head from '../node_modules/next/head';
 import { RegisteredResponseBody } from './api/register';
 
-export default function Register() {
+type Props = {
+  refreshUserProfile: () => Promise<void>;
+};
+
+export default function Register(props: Props) {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
@@ -39,12 +43,26 @@ export default function Register() {
     // if we have an error ( errors is an array of objects and sends a message, there can be multiple errors)
     if ('errors' in registeredResponseBody) {
       setErrors(registeredResponseBody.errors);
+      return;
+    }
+    const returnTo = router.query.returnTo;
+
+    if (
+      returnTo &&
+      !Array.isArray(returnTo) &&
+      // Security: Validate returnTo parameter against valid path
+      // (because this is untrusted user input)
+      /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
+    ) {
+      await props.refreshUserProfile();
+      await router.push(returnTo);
     } else {
-      // redirect user to home if there is an error
-      await router.push(`/users/${registeredResponseBody.user.id}`);
+      // redirect user to user profile
+      // if you want to use userProfile with username redirect to /users/username
+      await props.refreshUserProfile();
+      await router.push(`/`);
     }
   }
-
   return (
     <div>
       <Head>
