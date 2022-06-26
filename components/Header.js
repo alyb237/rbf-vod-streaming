@@ -8,7 +8,7 @@ const headerStyles = css`
   background-color: black;
   padding-top: 1px;
   flex-direction: column;
-
+  border-bottom: 2px solid black;
   .divWrapper {
     display: flex;
     justify-content: space-between;
@@ -28,9 +28,15 @@ const headerStyles = css`
     color: white;
     padding: 5px;
     color: #99f442;
+    font-weight: bold;
   }
   .imgStyles {
     cursor: pointer;
+  }
+  img {
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
   }
 `;
 
@@ -40,9 +46,10 @@ export default function Header() {
       <div className="divWrapper">
         <img
           className="imgStyles"
-          src="logo.png"
+          src="logo.jpg"
           alt="temporary logo"
-          width="70"
+          width="249"
+          height="40"
         />
         <ul>
           <Link href="/" text-decoration="none">

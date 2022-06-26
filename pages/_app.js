@@ -11,9 +11,9 @@ export default function MyApp({ Component, pageProps }) {
             padding: 0;
             margin: 0;
             font-family: 'Quicksand', sans-serif;
-            background-color: black;
+            background-color: white;
             box-sizing: border-box;
-            color: white;
+            color: black;
           }
         `}
       />

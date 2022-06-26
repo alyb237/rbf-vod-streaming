@@ -1,13 +1,21 @@
 /** @jsxImportSource @emotion/react */
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Head from '../node_modules/next/head';
+import { RegisteredResponseBody } from './api/register';
 
 export default function Register() {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<
+    {
+      message: string;
+    }[]
+  >([]);
 
+  const router = useRouter();
   async function registerHandler() {
     const registeredResponse = await fetch('/api/register', {
       method: 'POST',
@@ -23,9 +31,18 @@ export default function Register() {
       }),
     });
     // save the response object into a variable
-    const registerResponseBody = await registeredResponse.json();
-    console.log('registerResponseBody', registerResponseBody);
+    const registeredResponseBody: RegisteredResponseBody =
+      await registeredResponse.json();
+    console.log('registerResponseBody', registeredResponseBody);
     // checking the network dev tool in payload shows the created object
+
+    // if we have an error ( errors is an array of objects and sends a message, there can be multiple errors)
+    if ('errors' in registeredResponseBody) {
+      setErrors(registeredResponseBody.errors);
+    } else {
+      // redirect user to home if there is an error
+      await router.push(`/users/${registeredResponseBody.user.id}`);
+    }
   }
 
   return (
@@ -38,7 +55,6 @@ export default function Register() {
 
       <main>
         <h1>Register</h1>
-
         <label>
           {' '}
           first name:
@@ -72,6 +88,9 @@ export default function Register() {
           />
         </label>
         <button onClick={() => registerHandler()}>Register</button>
+        {errors.map((error) => (
+          <div key={`error-${error.message}`}>{error.message}</div>
+        ))}
       </main>
     </div>
   );

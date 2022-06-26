@@ -37,6 +37,9 @@ export type User = {
   passwordHash: string;
 };
 
+// type for verifying email with hash
+type EmailWithPasswordHash = User & { passwordHash: string };
+
 // keep camelCase in the naming but change it to last_name when querying to database
 export async function createUser(
   firstName: string,
@@ -57,3 +60,78 @@ export async function createUser(
   // we want to redirect with the id so then it will be possible to redirect with the user id and don't need to show email or password
   return camelcaseKeys(user);
 }
+
+// create function to get user to check if they already are registered
+
+export async function getUserByNameAndEmail(
+  firstName: string,
+  lastName: string,
+  email: string,
+) {
+  if (!firstName || !lastName || !email) return undefined;
+
+  const [user] = await sql<[User | undefined]>`
+    SELECT
+      id,
+      first_name,
+      last_name,
+      email
+    FROM
+      users
+    WHERE
+      first_name = ${firstName} AND
+      last_name = ${lastName} AND
+      email = ${email}
+
+  `;
+  return user && camelcaseKeys(user);
+}
+
+export async function getUserByPasswordHashByEmail(email: string) {
+  if (!email) return undefined;
+
+  const [user] = await sql<[EmailWithPasswordHash | undefined]>`
+    SELECT
+    *
+    FROM
+      users
+    WHERE
+      email = ${email}
+
+  `;
+  return user && camelcaseKeys(user);
+}
+
+export async function getUserById(userId: number) {
+  if (!userId) return undefined;
+
+  const [user] = await sql<[User | undefined]>`
+    SELECT
+      id,
+      first_name,
+      last_name
+    FROM
+      users
+    WHERE
+      id = ${userId}
+  `;
+  return user && camelcaseKeys(user);
+}
+
+// if using the username to to get the name from the url and save it to the database
+// export async function getUserByName(firstName: string, lastName: string) {
+//   if (!firstName || !lastName) return undefined;
+
+//   const [user] = await sql<[User | undefined]>`
+//     SELECT
+//       id,
+//       first_name
+//       last_name
+//     FROM
+//       users
+//     WHERE
+//       first_name = ${firstName} AND
+//       last_name = ${lastName}
+//   `;
+//   return user && camelcaseKeys(user);
+// }
