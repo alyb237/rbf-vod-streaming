@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const mainContentWrapper = css`
   margin: 0%;
@@ -38,6 +39,7 @@ export default function Home() {
           />
         </div>
       </section>
+      <Link href="/subscribe">Subscribe</Link>
     </>
   );
 }

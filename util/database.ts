@@ -141,12 +141,16 @@ type Session = {
   token: string;
 };
 
-export async function createSession(token: string, userId: User['id']) {
+export async function createSession(
+  token: string,
+  userId: User['id'],
+  csrfSecret: string,
+) {
   const [session] = await sql<[Session]>`
   INSERT INTO sessions
-    (token, user_id)
+    (token, user_id, csrf_secret)
   VALUES
-    (${token}, ${userId})
+    (${token}, ${userId} , ${csrfSecret})
   RETURNING
     id,
     token
@@ -157,6 +161,7 @@ export async function createSession(token: string, userId: User['id']) {
   return camelcaseKeys(session);
 }
 
+// returns one user of the current session
 export async function getUserByValidSessionToken(token: string) {
   if (!token) return undefined;
 
@@ -164,7 +169,8 @@ export async function getUserByValidSessionToken(token: string) {
   SELECT
     users.id,
     users.first_name,
-    users.last_name
+    users.last_name,
+    users.email
   FROM
     users,
     sessions
@@ -201,4 +207,47 @@ export async function deleteExpiredSessions() {
   `;
 
   return sessions.map((session) => camelcaseKeys(session));
+}
+
+export type Video = {
+  id: number;
+  videoName: string;
+  link: string;
+  descriptionText: string;
+};
+
+export async function getAllVideos() {
+  const videos = await sql<Video[]>`
+    SELECT * FROM videos
+  `;
+  return videos.map((video) => camelcaseKeys(video));
+}
+
+export async function getVideo() {
+  const [video] = await sql`
+    SELECT * FROM videos
+
+  `;
+  return camelcaseKeys(video);
+}
+
+export async function getVideoById(id: number) {
+  if (!id) return undefined;
+
+  const [video] = await sql<[Video | undefined]>`
+    SELECT id FROM videos
+    WHERE id = ${id}
+
+  `;
+  return video && camelcaseKeys(video);
+}
+
+export async function getVideoByName(videoName: string) {
+  if (!videoName) return undefined;
+
+  const [video] = await sql<[Video | undefined]>`
+    SELECT video_name, description_text, link FROM videos
+    WHERE video_name = ${videoName}
+  `;
+  return video && camelcaseKeys(video);
 }

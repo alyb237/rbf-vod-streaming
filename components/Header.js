@@ -58,8 +58,8 @@ export default function Header(props) {
           <Link href="/users/private-profile" text-decoration="none">
             Profile
           </Link>
-          <Link href="/logout" text-decoration="none">
-            Logout
+          <Link href="/videos/private-video" text-decoration="none">
+            Browse
           </Link>
         </ul>
       </div>
@@ -68,6 +68,7 @@ export default function Header(props) {
       )}
       {props.user ? (
         // using a instead of Link since we want to force a full refresh
+        // eslint-disable-next-line @next/next/no-html-link-for-pages
         <a href="/logout">Logout</a>
       ) : (
         <>
