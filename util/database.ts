@@ -1,5 +1,6 @@
 import camelcaseKeys from 'camelcase-keys';
 import postgres from 'postgres';
+import Subscription from '../components/Subscription';
 
 // Type needed for the connection function below
 declare module globalThis {
@@ -250,4 +251,49 @@ export async function getVideoByName(videoName: string) {
     WHERE video_name = ${videoName}
   `;
   return video && camelcaseKeys(video);
+}
+
+export type Subscription = {
+  id: number;
+  active: boolean;
+  expiryTimestamp: Date;
+  email: string;
+  checkoutId: string;
+  sessionId: string;
+};
+
+export async function createSubscription(
+  status: boolean,
+  expiryTimestamp: Date,
+  name: string,
+  email: string,
+  checkoutSessionId: string,
+) {
+  const [subscription] = await sql<[Subscription]>`
+  INSERT INTO subscription
+    (status, expiry_timestamp, name, email, checkout_session_id)
+  VALUES
+    (${status}, ${expiryTimestamp}, ${name}, ${email}, ${checkoutSessionId})
+  RETURNING
+    status,
+    expiry_timestamp,
+    name,
+    email,
+    checkout_session_id
+  `;
+  return subscription && camelcaseKeys(subscription);
+}
+
+export async function getAllSubscriptions() {
+  const subscriptions = await sql<Subscription[]>`
+    SELECT * FROM subscription
+  `;
+  return subscriptions.map((subscription) => camelcaseKeys(subscription));
+}
+
+export async function getSubscription() {
+  const subscription = await sql<Subscription[]>`
+  SELECT * FROM subscription
+  `;
+  return subscription && camelcaseKeys(subscription);
 }

@@ -1,11 +1,9 @@
 import { loadStripe } from '@stripe/stripe-js';
-// import { useState } from 'react';
+import { useState } from 'react';
 import stripe from 'stripe';
 import Subscription from '../components/Subscription';
 
 export default function Subscribe(props) {
-  // use state variable for updating the the subscribed database
-
   async function handlePurchase(quantity, mode, priceId) {
     // 1. connect with stripe
     // auth with stripe client
@@ -26,6 +24,9 @@ export default function Subscribe(props) {
 
     const { session } = await response.json();
 
+    //
+    //
+
     // 2. Redirect customer to url from Checkout session
     stripeClient.redirectToCheckout({ sessionId: session.id }).catch(() => {
       console.log('redirect fails');
@@ -41,7 +42,7 @@ export default function Subscribe(props) {
             handlePurchase(1, 'subscription', props.productPrices[0].priceId)
           }
         >
-          Buy for $ {props.productPrices[0].amount}
+          Subscribe for €{props.productPrices[0].amount}
         </button>
       </div>
     </div>
