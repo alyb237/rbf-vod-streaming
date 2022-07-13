@@ -255,31 +255,27 @@ export async function getVideoByName(videoName: string) {
 
 export type Subscription = {
   id: number;
-  active: boolean;
+  paymentStatus: string;
   expiryTimestamp: Date;
   email: string;
   checkoutId: string;
-  sessionId: string;
+  userId: number;
 };
 
 export async function createSubscription(
-  status: boolean,
-  expiryTimestamp: Date,
+  paymentStatus: string,
   name: string,
   email: string,
   checkoutSessionId: string,
+  userId: number,
 ) {
   const [subscription] = await sql<[Subscription]>`
   INSERT INTO subscription
-    (status, expiry_timestamp, name, email, checkout_session_id)
+    (payment_status, name, email, checkout_session_id, user_id)
   VALUES
-    (${status}, ${expiryTimestamp}, ${name}, ${email}, ${checkoutSessionId})
+    (${paymentStatus}, ${name}, ${email}, ${checkoutSessionId}, ${userId})
   RETURNING
-    status,
-    expiry_timestamp,
-    name,
-    email,
-    checkout_session_id
+   *
   `;
   return subscription && camelcaseKeys(subscription);
 }
@@ -296,4 +292,32 @@ export async function getSubscription() {
   SELECT * FROM subscription
   `;
   return subscription && camelcaseKeys(subscription);
+}
+
+export async function getUserWithValidTokenAndSubscription(token: string) {
+  if (!token) return undefined;
+
+  const [userSubscribed] = await sql`
+  SELECT id, first_name, last_name, token
+  FROM users
+  INNER JOIN sessions
+  ON users.id = sessions.user_id
+  INNER JOIN subscription
+  ON users.id = subscription.user_id
+  WHERE
+    sessions.token = ${token} AND
+    sessions.expiry_timestamp > now();
+  `;
+  return userSubscribed && camelcaseKeys(userSubscribed);
+}
+
+export async function getSubscriptionStatus(userIdFromVideoPage: number) {
+  if (!userIdFromVideoPage) return undefined;
+  const [status] = await sql`
+    SELECT payment_status FROM subscription
+    WHERE user_id = ${userIdFromVideoPage} AND
+    expiry_timestamp > now();
+
+  `;
+  return status && status.payment_status;
 }

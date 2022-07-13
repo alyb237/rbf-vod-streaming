@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import stripe from 'stripe';
-import { createSubscription } from '../util/database';
+import {
+  createSubscription,
+  getAllSubscriptions,
+  getUserByValidSessionToken,
+} from '../util/database';
 
 export default function Success(props) {
   return (
@@ -32,26 +36,35 @@ export async function getServerSideProps(ctx) {
   const { session_id: sessionId } = ctx.query;
   const session = await stripeServer.checkout.sessions.retrieve(sessionId);
   console.log('this is the session', session);
+  const allSubscriptions = await getAllSubscriptions();
 
-  if (session.payment_status === 'paid') {
+  const user = await getUserByValidSessionToken(ctx.req.cookies.sessionToken);
+
+  const idFoundInDbAndSession = allSubscriptions.find(
+    (singleIdFromDb) => session.id === singleIdFromDb.checkoutId,
+  );
+  // console.log('checking for no match - want undefined', idFoundInDbAndSession);
+  if (
+    idFoundInDbAndSession === undefined &&
+    session.payment_status === 'paid'
+  ) {
     await createSubscription(
-      session.status,
-      session.expires_at,
+      session.payment_status,
       session.customer_details.name,
       session.customer_details.email,
       session.id,
+      user.id,
     ).catch(() => {
       console.log('insert into subscription table fails');
     });
+    console.log('subscriptions from database', allSubscriptions);
 
-    // console.log('paid!');
     return {
       props: {
         session,
       },
     };
-  }
-  if (session.payment_status !== 'paid') {
+  } else {
     return {
       redirect: {
         destination: `/canceled`,

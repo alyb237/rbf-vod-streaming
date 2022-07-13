@@ -1,7 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import { stringify } from 'querystring';
 import ReactPlayer from 'react-player';
-import { getVideoByName, Video } from '../../../util/database';
+import {
+  getSubscriptionStatus,
+  getUserByValidSessionToken,
+  getVideoByName,
+  Video,
+} from '../../../util/database';
 import { queryParamString } from '../../../util/queryParams';
 
 type Props = {
@@ -50,22 +56,49 @@ export default function VideoName(props: Props) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const videoNameFromUrl = queryParamString(context.query.videoName);
-  // console.log(context.query);
-  // console.log('name from url', videoNameFromUrl);
 
-  if (!videoNameFromUrl || Array.isArray(videoNameFromUrl)) {
-    return { props: {} };
+  // get current logged in user
+  const user = await getUserByValidSessionToken(
+    context.req.cookies.sessionToken,
+  );
+
+  // get subscription table and check for valid payment_status
+
+  if (!user) {
+    console.log('please register or login');
+    return {
+      redirect: {
+        destination: `/login`,
+        permanent: false,
+      },
+    };
   }
+  const status = await getSubscriptionStatus(user.id);
 
-  const video = await getVideoByName(videoNameFromUrl);
+  if (status === 'paid') {
+    // pending -- check expiration date here as well
+    console.log('you are validated!', status);
 
-  if (!video) {
-    context.res.statusCode = 404;
+    if (!videoNameFromUrl || Array.isArray(videoNameFromUrl)) {
+      return { props: {} };
+    }
+
+    const video = await getVideoByName(videoNameFromUrl);
+    if (!video) {
+      context.res.statusCode = 404;
+    }
+
+    return {
+      props: {
+        video: video,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: `/subscribe?returnTo=/videos/private-video/`,
+        permanent: false,
+      },
+    };
   }
-
-  return {
-    props: {
-      video: video,
-    },
-  };
 }

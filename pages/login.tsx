@@ -83,6 +83,7 @@ export default function Login(props: Props) {
           {' '}
           password:
           <input
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
@@ -91,6 +92,11 @@ export default function Login(props: Props) {
         {errors.map((error) => (
           <div key={`error-${error.message}`}>{error.message}</div>
         ))}
+        <br />
+        <br />
+        <div>
+          Don't have an account? Please register <a href="\register">here</a>
+        </div>
       </main>
     </div>
   );

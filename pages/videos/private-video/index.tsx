@@ -1,14 +1,9 @@
 import { css } from '@emotion/react';
-import { GetServerSidePropsContext } from 'next';
+// import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 // import ReactPlayer from 'react-player';
-import {
-  getAllVideos,
-  getUserByValidSessionToken,
-  User,
-  Video,
-} from '../../../util/database';
+import { getAllVideos, Video } from '../../../util/database';
 
 const mainContentDiv = css`
   height: 110vh;
@@ -29,7 +24,6 @@ const videosListStyles = css`
 
 type Props = {
   videos: Video[];
-  user: User;
 };
 
 export default function Browse(props: Props) {
@@ -62,27 +56,32 @@ export default function Browse(props: Props) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps() {
   const videos = await getAllVideos();
+  // console.log('checking videos ', videos);
   // console.log('checking to see what is in dB', videos);
 
   // check to see if user is logged in and if not redirect to login page or subscribe
-  const user = await getUserByValidSessionToken(
-    context.req.cookies.sessionToken,
-  );
-  if (user) {
-    return {
-      props: {
-        user: user,
-        videos: videos,
-      },
-    };
-  }
+  // const user = await getUserByValidSessionToken(
+  //   context.req.cookies.sessionToken,
+  // );
+  // console.log('user', user);
+
+  // const subscribedUser = await getUserWithValidTokenAndSubscription(
+  //   context.req.cookies.sessionToken,
+  // );
+  // console.log('subscribed user', subscribedUser);
 
   return {
-    redirect: {
-      destination: `/login?returnTo=/videos/private-video`,
-      permanent: false,
+    props: {
+      videos: videos,
     },
   };
+
+  // return {
+  //   redirect: {
+  //     destination: `/login?returnTo=/videos/private-video`,
+  //     permanent: false,
+  //   },
+  // };
 }

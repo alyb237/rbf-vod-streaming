@@ -1,5 +1,4 @@
 import { loadStripe } from '@stripe/stripe-js';
-import { useState } from 'react';
 import stripe from 'stripe';
 import Subscription from '../components/Subscription';
 
