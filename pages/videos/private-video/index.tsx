@@ -58,30 +58,10 @@ export default function Browse(props: Props) {
 
 export async function getServerSideProps() {
   const videos = await getAllVideos();
-  // console.log('checking videos ', videos);
-  // console.log('checking to see what is in dB', videos);
-
-  // check to see if user is logged in and if not redirect to login page or subscribe
-  // const user = await getUserByValidSessionToken(
-  //   context.req.cookies.sessionToken,
-  // );
-  // console.log('user', user);
-
-  // const subscribedUser = await getUserWithValidTokenAndSubscription(
-  //   context.req.cookies.sessionToken,
-  // );
-  // console.log('subscribed user', subscribedUser);
 
   return {
     props: {
       videos: videos,
     },
   };
-
-  // return {
-  //   redirect: {
-  //     destination: `/login?returnTo=/videos/private-video`,
-  //     permanent: false,
-  //   },
-  // };
 }

@@ -4,39 +4,37 @@ import Link from 'next/link';
 
 const headerStyles = css`
   display: flex;
-  justify-content: space-between;
-  background-color: black;
-  padding-top: 1px;
-  flex-direction: column;
-  border-bottom: 2px solid black;
-  .divWrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  ul {
-    list-style: none;
-    display: flex;
-    color: #99f442;
-    justify-content: space-between;
-    gap: 4px;
-    text-decoration: none;
-    margin-right: 10px;
-  }
+  background-color: #fbfbf6;
+  border-bottom: 2px solid #888;
 
-  a {
-    text-decoration: none;
-    color: white;
-    padding: 5px;
-    color: #99f442;
-    font-weight: bold;
-  }
-  .imgStyles {
-    cursor: pointer;
-  }
-  img {
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-left: 10px;
+  .divWrapper {
+    width: 100%;
+    .headerNameDiv {
+      h3 {
+        margin: auto;
+        justify-content: flex-start;
+        margin: 0;
+        font-weight: 900;
+        font-style: italic;
+        font-size: x-large;
+      }
+    }
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      color: #222;
+      text-decoration: none;
+      a {
+        margin: auto;
+        font-weight: 400;
+        text-decoration: none;
+        color: #222;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
   }
 `;
 
@@ -44,38 +42,36 @@ export default function Header(props) {
   return (
     <header css={headerStyles}>
       <div className="divWrapper">
-        <img
-          className="imgStyles"
-          src="logo.jpg"
-          alt="temporary logo"
-          width="249"
-          height="40"
-        />
         <ul>
-          <Link href="/" text-decoration="none">
-            Home
-          </Link>
-          <Link href="/users/private-profile" text-decoration="none">
-            Profile
-          </Link>
-          <Link href="/videos/private-video" text-decoration="none">
-            Browse
-          </Link>
+          <div className="headerNameDiv">
+            <h3>Resonate Body Fitness</h3>
+          </div>
+          <div>
+            <Link href="/" text-decoration="none">
+              Home
+            </Link>
+            <Link href="/users/private-profile" text-decoration="none">
+              Account
+            </Link>
+            <Link href="/videos/private-video" text-decoration="none">
+              Browse
+            </Link>
+            {props.user && (
+              <Link href="/users/private-profile">{props.user.firstName}</Link>
+            )}
+            {props.user ? (
+              // using a instead of Link since we want to force a full refresh
+              // eslint-disable-next-line @next/next/no-html-link-for-pages
+              <a href="/logout">Logout</a>
+            ) : (
+              <>
+                <Link href="/register">Register</Link>
+                <Link href="/login">Login</Link>
+              </>
+            )}
+          </div>
         </ul>
       </div>
-      {props.user && (
-        <Link href="/users/private-profile">{props.user.firstName}</Link>
-      )}
-      {props.user ? (
-        // using a instead of Link since we want to force a full refresh
-        // eslint-disable-next-line @next/next/no-html-link-for-pages
-        <a href="/logout">Logout</a>
-      ) : (
-        <>
-          <Link href="/register">Register</Link>
-          <Link href="/login">Login</Link>
-        </>
-      )}
     </header>
   );
 }

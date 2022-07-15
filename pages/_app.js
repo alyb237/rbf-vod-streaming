@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css, Global } from '@emotion/react';
 import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
@@ -30,12 +31,14 @@ export default function MyApp({ Component, pageProps }) {
         styles={css`
           html,
           body {
+            font-family: 'DotGothic16', sans-serif;
+            font-family: 'Public Sans', sans-serif;
+            font-family: 'Rubik', sans-serif;
             padding: 0;
             margin: 0;
-            font-family: 'Quicksand', sans-serif;
-            background-color: white;
+            background-color: #fbfbf6;
             box-sizing: border-box;
-            color: black;
+            color: #222;
           }
         `}
       />
