@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Marquee from 'react-fast-marquee';
 
 const marqueeStyles = css`
-  width: 100%;
+  max-width: 100%;
   color: #fff;
   margin-top: 0;
   overflow: hidden;

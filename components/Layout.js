@@ -1,5 +1,4 @@
-// import { Elements } from '@stripe/react-stripe-js';
-// import { loadStripe } from '@stripe/stripe-js';
+import Footer from './Footer';
 import Header from './Header';
 
 export default function Layout(props) {
@@ -7,6 +6,7 @@ export default function Layout(props) {
     <div>
       <Header user={props.user} refreshUserProfile={props.refreshUserProfile} />
       {props.children}
+      <Footer />
     </div>
   );
 }
