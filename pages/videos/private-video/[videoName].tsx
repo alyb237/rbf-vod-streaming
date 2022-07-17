@@ -1,6 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { stringify } from 'querystring';
 import ReactPlayer from 'react-player';
 import {
   getSubscriptionStatus,

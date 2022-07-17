@@ -215,6 +215,7 @@ export type Video = {
   videoName: string;
   link: string;
   descriptionText: string;
+  thumbnail: string;
 };
 
 export async function getAllVideos() {

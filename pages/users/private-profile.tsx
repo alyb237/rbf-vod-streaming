@@ -1,4 +1,4 @@
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { getUserByValidSessionToken, User } from '../../util/database';
@@ -6,6 +6,10 @@ import { getUserByValidSessionToken, User } from '../../util/database';
 type Props = {
   user?: User;
 };
+
+const mainContentWrapper = css`
+  height: 100vh;
+`;
 
 export default function Profile(props: Props) {
   if (!props.user) {
@@ -28,11 +32,10 @@ export default function Profile(props: Props) {
         <meta name="description" content="Profile" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main css={mainContentWrapper}>
         <main>
           <h1>
-            User #{props.user.id} (Name: {props.user.firstName}
-            {props.user.lastName})
+            Account: {props.user.lastName},{props.user.firstName}
           </h1>
         </main>
       </main>

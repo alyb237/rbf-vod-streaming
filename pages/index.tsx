@@ -83,9 +83,11 @@ export default function Home() {
           </div>
 
           <p css={paragraphStyles}>
-            Body Fluid
-            <br /> Conscious
-            <br /> Movement
+            Conscious <br />
+            Movement <br />
+            For Anyone
+            <br />
+            at Anytime
           </p>
         </section>
         <BannerStyles />

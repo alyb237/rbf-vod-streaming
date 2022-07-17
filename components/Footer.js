@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
-import { Link } from 'next/link';
 
 const footerContentWrapper = css`
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   background-color: #fbfbf6;
   border-top: 2px solid #888;
 

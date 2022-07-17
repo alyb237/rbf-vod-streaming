@@ -1,6 +1,46 @@
+import { css } from '@emotion/react';
 import { loadStripe } from '@stripe/stripe-js';
 import stripe from 'stripe';
 import Subscription from '../components/Subscription';
+
+const mainContentWrapper = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  border: 1px solid red;
+`;
+
+const divContentWrapper = css`
+  //display: flex;
+  justify-content: center;
+  border: 1px solid pink;
+  max-width: 25%;
+  padding: 1em;
+  .imgWrapper {
+    border: 2px solid purple;
+  }
+  .buttonStyles {
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 14px 24px 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 200ms, ease-in 100ms;
+    background: #222;
+    color: #fbfbf6;
+    box-shadow: 0 0 0 3px #ccaaf3 inset;
+    :hover {
+      transform: translateY(-2px);
+    }
+  }
+`;
 
 export default function Subscribe(props) {
   async function handlePurchase(quantity, mode, priceId) {
@@ -33,10 +73,13 @@ export default function Subscribe(props) {
   }
 
   return (
-    <div>
-      <div>
-        <Subscription image={props.productPrices[0].image} />
+    <main css={mainContentWrapper}>
+      <div css={divContentWrapper}>
+        <div className="imgWrapper">
+          <Subscription image={props.productPrices[0].image} />
+        </div>
         <button
+          className="buttonStyles"
           onClick={() =>
             handlePurchase(1, 'subscription', props.productPrices[0].priceId)
           }
@@ -44,7 +87,7 @@ export default function Subscribe(props) {
           Subscribe for €{props.productPrices[0].amount}
         </button>
       </div>
-    </div>
+    </main>
   );
 }
 
