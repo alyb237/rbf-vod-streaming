@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const mainContentWrapper = css`
   margin: 0%;
@@ -67,6 +68,7 @@ const divParagraphStyles = css`
 `;
 
 export default function SignUp() {
+  const router = useRouter();
   return (
     <section css={mainContentWrapper}>
       <div className="imgWrapper">
@@ -87,7 +89,14 @@ export default function SignUp() {
           be perfect. The main goal is to make people feel empowered by their
           own strength and body.
         </p>
-        <button className="buttonStyles">About Me</button>
+        <button
+          className="buttonStyles"
+          onClick={() => {
+            router.push('/about').catch(() => {});
+          }}
+        >
+          About Me
+        </button>
       </div>
     </section>
   );

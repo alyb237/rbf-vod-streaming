@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import ReactPlayer from 'react-player';
@@ -12,6 +13,10 @@ import { queryParamString } from '../../../util/queryParams';
 type Props = {
   video?: Video;
 };
+
+const mainContentWrapper = css`
+  height: 100vh;
+`;
 
 export default function VideoName(props: Props) {
   if (!props.video) {
@@ -33,7 +38,7 @@ export default function VideoName(props: Props) {
         <meta name="description" content="About the app" />
       </Head>
 
-      <main>
+      <main css={mainContentWrapper}>
         <ReactPlayer
           url={props.video.link}
           controls={true}

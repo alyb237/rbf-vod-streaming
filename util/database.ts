@@ -299,7 +299,7 @@ export async function getUserWithValidTokenAndSubscription(token: string) {
   if (!token) return undefined;
 
   const [userSubscribed] = await sql`
-  SELECT id, first_name, last_name, token
+  SELECT users.id, first_name, last_name, token, to_char(subscription.expiry_timestamp::timestamp, 'DD Mon YYYY HH:MI:SSPM') as expiration_date
   FROM users
   INNER JOIN sessions
   ON users.id = sessions.user_id
@@ -311,6 +311,14 @@ export async function getUserWithValidTokenAndSubscription(token: string) {
   `;
   return userSubscribed && camelcaseKeys(userSubscribed);
 }
+
+// export async function getReducedSubscriber(s: Subscription) {
+//   const reducedSubscriber = {
+//     expiryTimestamp: s.expiryTimestamp.toString,
+//     email: s.email,
+//   };
+//   return reducedSubscriber;
+// }
 
 export async function getSubscriptionStatus(userIdFromVideoPage: number) {
   if (!userIdFromVideoPage) return undefined;

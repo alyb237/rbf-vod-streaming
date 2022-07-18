@@ -4,11 +4,10 @@ import Image from 'next/image';
 const mainContentWrapper = css`
   display: flex;
   flex-direction: column;
-  //justify-content: center;
+  justify-content: center;
   align-items: center;
 
-  p {
-    justify-content: center;
+  .textWrapper {
   }
 
   img {
@@ -17,12 +16,14 @@ const mainContentWrapper = css`
     align-items: center;
     height: auto;
     border-radius: 10px;
-    max-width: 50%;
+    max-width: 25%;
+    margin: auto;
 
     .imgWrapper {
+      display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      /* justify-content: center; */
     }
   }
 `;
@@ -32,14 +33,13 @@ export default function Subscription(props) {
     <main css={mainContentWrapper}>
       <h1>Subscription Plan</h1>
       <p>
-        This is a recurring monthly payment powered by Stripe. You will be
-        redirected to the checkout page.
-      </p>
-      <p>
         <em>
-          To view billing date please check your account. Email me to cancel!
+          This is a recurring monthly payment powered by Stripe. You will be
+          redirected to the checkout page. To view billing date please check
+          your account. When you're ready to cancel please email me.
         </em>
       </p>
+
       <div className="imgWrapper">
         <img
           alt="resonate body logo"

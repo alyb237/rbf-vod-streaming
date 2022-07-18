@@ -149,12 +149,12 @@ export default function Browse(props: Props) {
       </main>
 
       <div css={iframeWrapper}>
-        <h3>
+        {/* <h3>
           <em>
             **Recommended to open SoundCloud on another tab in order to have
             volume control**
           </em>
-        </h3>
+        </h3> */}
         <iframe
           title="soundcloud"
           width="100%"

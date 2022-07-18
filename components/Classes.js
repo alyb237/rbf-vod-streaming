@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const mainContentWrapper = css`
   margin: 0%;
@@ -56,6 +57,7 @@ const paragraphStyles = css`
 `;
 
 export default function Classes() {
+  const router = useRouter();
   return (
     <section css={mainContentWrapper}>
       <p css={paragraphStyles}>
@@ -74,7 +76,14 @@ export default function Classes() {
           alt="profile intro"
         />
         <div css={buttonWrapper}>
-          <button css={buttonStyle}>Classes</button>
+          <button
+            onClick={() => {
+              router.push('/classes').catch(() => {});
+            }}
+            css={buttonStyle}
+          >
+            Classes
+          </button>
         </div>
       </div>
     </section>
