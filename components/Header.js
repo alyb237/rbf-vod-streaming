@@ -65,7 +65,7 @@ export default function Header(props) {
             )}
             {props.user ? (
               // using a instead of Link since we want to force a full refresh
-              //<a href="/logout">Logout</a>
+              // <a href="/logout">Logout</a>
               // using custom component to work around ESLint error
               <Anchor href="/logout">Logout</Anchor>
             ) : (
