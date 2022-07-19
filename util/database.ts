@@ -163,7 +163,7 @@ export async function createSession(
 }
 
 // returns one user of the current session
-export async function getUserByValidSessionToken(token: string) {
+export async function getUserByValidSessionToken(token: string | undefined) {
   if (!token) return undefined;
 
   const [user] = await sql<[User | undefined]>`
@@ -295,7 +295,9 @@ export async function getSubscription() {
   return subscription && camelcaseKeys(subscription);
 }
 
-export async function getUserWithValidTokenAndSubscription(token: string) {
+export async function getUserWithValidTokenAndSubscription(
+  token: string | undefined,
+) {
   if (!token) return undefined;
 
   const [userSubscribed] = await sql`

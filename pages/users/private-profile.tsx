@@ -80,12 +80,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-  console.log('user', user);
+  // console.log('user', user);
 
   const subscribedUser = await getUserWithValidTokenAndSubscription(
     context.req.cookies.sessionToken,
   );
-  console.log('subscribed user info from db', subscribedUser);
+  // console.log('subscribed user info from db', subscribedUser);
 
   if (user) {
     return {
