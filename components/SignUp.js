@@ -29,7 +29,7 @@ const divParagraphStyles = css`
   justify-content: flex-start;
   align-items: center;
   color: #fbfbf6;
-  //border: 1px solid yellow;
+  border: 1px solid #222;
 
   .headerStyles {
     flex-direction: column;
@@ -39,13 +39,13 @@ const divParagraphStyles = css`
     margin: 1em;
     margin-bottom: 0.5em;
     padding: 0;
-    // border: 1px solid white;
+    border: 1px solid #222;
   }
   .textStyles {
     align-items: center;
     font-size: 1.5vw;
     font-weight: 400;
-    // border: 1px solid pink;
+    border: 1px solid #222;
   }
   .buttonStyles {
     display: inline-block;
