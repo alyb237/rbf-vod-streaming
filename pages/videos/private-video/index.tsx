@@ -178,7 +178,7 @@ export default function Browse(props: Props) {
 
 export async function getServerSideProps() {
   const videos = await getAllVideos();
-  console.log(videos);
+  console.log('videos', videos);
 
   return {
     props: {
