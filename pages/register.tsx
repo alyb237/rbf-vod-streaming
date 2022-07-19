@@ -137,6 +137,7 @@ export default function Register(props: Props) {
             first name:
             <input
               className="inputStyles"
+              placeholder="first name"
               value={firstname}
               onChange={(event) => setFirstname(event.currentTarget.value)}
             />
@@ -147,6 +148,7 @@ export default function Register(props: Props) {
             last name:
             <input
               className="inputStyles"
+              placeholder="last name"
               value={lastname}
               onChange={(event) => setLastname(event.currentTarget.value)}
             />
@@ -157,6 +159,7 @@ export default function Register(props: Props) {
             email:
             <input
               className="inputStyles"
+              placeholder="example@email.com"
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
             />
@@ -167,6 +170,7 @@ export default function Register(props: Props) {
             password:
             <input
               className="inputStyles"
+              placeholder="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
@@ -178,7 +182,7 @@ export default function Register(props: Props) {
             <div key={`error-${error.message}`}>{error.message}</div>
           ))}
           <div>
-            Have an account already? Login <a href="\login">here</a>
+            Have an account already? <a href="\login">Login</a>
           </div>
         </div>
       </main>

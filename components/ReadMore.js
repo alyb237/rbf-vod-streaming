@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 const mainContentWrapper = css`
   height: 35vh;
@@ -24,9 +24,9 @@ const listContainer = css`
 export default function ReadMore() {
   return (
     <section css={mainContentWrapper}>
-      {/* <div css={listContainer}>
+      <div css={listContainer}>
         <Link href="/pages/subscribe">Subscribe</Link>
-      </div> */}
+      </div>
     </section>
   );
 }

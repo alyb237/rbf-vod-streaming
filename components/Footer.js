@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Link from 'next/link';
 
 const footerContentWrapper = css`
   height: 10vh;
@@ -24,6 +25,10 @@ const footerContentWrapper = css`
         margin: auto;
       }
       li {
+        a {
+          text-decoration: none;
+          color: #222;
+        }
         justify-content: center;
         align-items: center;
         margin: auto;
@@ -35,17 +40,20 @@ const footerContentWrapper = css`
 
 export default function Footer() {
   return (
-    <footer css={footerContentWrapper}>
+    <main css={footerContentWrapper}>
       <div className="divFooterContentWrapper">
         <ul className="ulLinkStyles">
-          <li>Contact</li>
+          <li>
+            <Link href="/contact">Contact</Link>
+          </li>
           <div className="headerNameDiv">
             <h3>Made with 💝 and 💦 in Vienna, AU</h3>
           </div>
-
-          <li>FAQ</li>
+          <li>
+            <Link href="/faq">FAQ</Link>
+          </li>
         </ul>
       </div>
-    </footer>
+    </main>
   );
 }

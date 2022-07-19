@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react/iframe-missing-sandbox */
+
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -90,9 +90,6 @@ const headerWrapper = css`
   align-items: center;
 
   h1 {
-    /* flex-direction: column;
-    justify-content: center;
-    align-items: center; */
     color: #222;
     margin: 0px;
   }
@@ -166,19 +163,11 @@ export default function Browse(props: Props) {
         />
 
         <div css={soundcloudStyle}>
-          <a
-            href="https://soundcloud.com/ldyosc"
-            title="LDY OSC"
-            target="_blank"
-          >
+          <a href="https://soundcloud.com/ldyosc" title="LDY OSC">
             LDY OSC ©
           </a>{' '}
           ·{' '}
-          <a
-            href="https://soundcloud.com/ldyosc/sets/r-b-f"
-            title="R.B.F."
-            target="_blank"
-          >
+          <a href="https://soundcloud.com/ldyosc/sets/r-b-f" title="R.B.F.">
             R.B.F.
           </a>
         </div>

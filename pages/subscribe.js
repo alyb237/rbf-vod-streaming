@@ -14,16 +14,19 @@ const mainContentWrapper = css`
 
 const divContentWrapper = css`
   justify-content: center;
-  max-width: 45%;
+  max-width: 50%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   .imgWrapper {
-    //border: 2px solid purple;
-    padding: 10px;
-    //width: 40vw;
+    padding: 5px;
+    margin: auto;
+    width: 40vw;
   }
   button {
     display: flex;
-    margin: 15px auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
     outline: 0;
     border: 0;
     cursor: pointer;
@@ -77,15 +80,14 @@ export default function Subscribe(props) {
       <div css={divContentWrapper}>
         <div className="imgWrapper">
           <Subscription image={props.productPrices[0].image} />
+          <button
+            onClick={() =>
+              handlePurchase(1, 'subscription', props.productPrices[0].priceId)
+            }
+          >
+            Subscribe for €{props.productPrices[0].amount}
+          </button>
         </div>
-        <button
-          className="buttonStyles"
-          onClick={() =>
-            handlePurchase(1, 'subscription', props.productPrices[0].priceId)
-          }
-        >
-          Subscribe for €{props.productPrices[0].amount}
-        </button>
       </div>
     </main>
   );

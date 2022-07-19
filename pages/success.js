@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import stripe from 'stripe';
+import Head from '../node_modules/next/head';
 import {
   createSubscription,
   getAllSubscriptions,
@@ -49,23 +50,31 @@ const mainContentWrapper = css`
 
 export default function Success(props) {
   return (
-    <section css={mainContentWrapper}>
-      <div className="divContentWrapper">
-        <h1>Successful Transaction</h1>
-        <p>
-          <span> Transaction total:{'  '} </span> {'   '} €
-          {props.session.amount_total / 100}
-        </p>
-        <p>
-          <span> Customer email: </span> {'   '}
-          {props.session.customer_details.email}
-        </p>
-        <p>
-          <span> Payment status: </span> {'   '}
-          {props.session.payment_status}
-        </p>
-      </div>
-    </section>
+    <>
+      <Head>
+        <title>Success</title>
+        <meta name="description" content="successful payment page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <section css={mainContentWrapper}>
+        <div className="divContentWrapper">
+          <h1>Successful Transaction</h1>
+          <p>
+            <span> Transaction total:{'  '} </span> {'   '} €
+            {props.session.amount_total / 100}
+          </p>
+          <p>
+            <span> Customer email: </span> {'   '}
+            {props.session.customer_details.email}
+          </p>
+          <p>
+            <span> Payment status: </span> {'   '}
+            {props.session.payment_status}
+          </p>
+        </div>
+      </section>
+    </>
   );
 }
 

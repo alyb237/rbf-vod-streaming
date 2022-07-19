@@ -61,8 +61,8 @@ export default function Header(props) {
             )}
             {props.user ? (
               // using a instead of Link since we want to force a full refresh
-              // eslint-disable-next-line @next/next/no-html-link-for-pages
-              <a href="/logout">Logout</a>
+
+              <Link href="/logout">Logout</Link>
             ) : (
               <>
                 <Link href="/register">Register</Link>

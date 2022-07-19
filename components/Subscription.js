@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
 
 const mainContentWrapper = css`
   display: flex;
@@ -35,8 +34,8 @@ export default function Subscription(props) {
       <p>
         <em>
           This is a recurring monthly payment powered by Stripe. You will be
-          redirected to the checkout page. To view billing date please check
-          your account. When you're ready to cancel please email me.
+          redirected to the checkout page. To view billing date check your
+          account. When you're ready to cancel please email me.
         </em>
       </p>
 

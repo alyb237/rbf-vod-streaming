@@ -134,6 +134,7 @@ export default function Login(props: Props) {
             email:
             <input
               className="inputStyles"
+              placeholder="example@email.com"
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
             />
@@ -144,6 +145,7 @@ export default function Login(props: Props) {
             password:
             <input
               className="inputStyles"
+              placeholder="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
@@ -157,7 +159,7 @@ export default function Login(props: Props) {
           <br />
           <br />
           <div>
-            Don't have an account? Register <a href="\register">here</a>
+            Don't have an account? <a href="\register">Register</a>
           </div>
         </div>
       </main>
