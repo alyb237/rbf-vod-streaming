@@ -37,6 +37,10 @@ const headerStyles = css`
     }
   }
 `;
+function Anchor({ children, ...restProps }) {
+  // using a instead of Link since we want to force a full refresh
+  return <a {...restProps}>{children}</a>;
+}
 
 export default function Header(props) {
   return (
@@ -61,8 +65,9 @@ export default function Header(props) {
             )}
             {props.user ? (
               // using a instead of Link since we want to force a full refresh
-
-              <Link href="/logout">Logout</Link>
+              //<a href="/logout">Logout</a>
+              // using custom component to work around ESLint error
+              <Anchor href="/logout">Logout</Anchor>
             ) : (
               <>
                 <Link href="/register">Register</Link>
