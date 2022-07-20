@@ -14,11 +14,11 @@ export default async function handler(request, response) {
   }
 
   // 2. get the required information for the purchase from the request
-
+  const baseUrl = process.env.BASE_URL
   // Url to return on payment success
-  const successUrl = 'http://localhost:3000/success';
+  const successUrl = `${baseUrl}/success`;
   // Url to return on payment cancel
-  const cancelUrl = 'http://localhost:3000/canceled';
+  const cancelUrl = `${baseUrl}/canceled`;
 
   const mode = request.body.mode;
   // console.log('mode: ', mode);
