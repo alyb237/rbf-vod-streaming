@@ -9,8 +9,8 @@ module.exports = function setPostgresDefaultsOnHeroku() {
       database,
       user,
       password,
-      publishableKey,
       stripeKey,
+      publishableKey,
       priceTwo,
       methodTypes,
       videoOne,
@@ -27,8 +27,8 @@ module.exports = function setPostgresDefaultsOnHeroku() {
     process.env.PGDATABASE = database;
     process.env.PGUSERNAME = user;
     process.env.PGPASSWORD = password;
-    process.env.STRIPE_PUBLISHABLE_KEY = publishableKey;
     process.env.STRIPE_SECRET_KEY = stripeKey;
+    process.env.STRIPE_PUBLISHABLE_KEY = publishableKey;
     process.env.PRICE2 = priceTwo;
     process.env.PAYMENT_METHOD_TYPES = methodTypes;
     process.env.VIDEO_1 = videoOne;
