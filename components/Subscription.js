@@ -25,13 +25,22 @@ const mainContentWrapper = css`
       /* justify-content: center; */
     }
   }
+  p {
+    align-items: center;
+  }
+  a {
+    /* text-decoration: none; */
+    color: #ccaaf3;
+  }
 `;
 
-export default function Subscription(props) {
+export default function Subscription() {
   return (
     <main css={mainContentWrapper}>
       <h1>Subscription Plan</h1>
-      <h3>Register before subscribing!</h3>
+      <h3>
+        Make sure you are <a href="\login">registered</a> before subscribing!
+      </h3>
       <p>
         <em>
           This is a recurring monthly payment powered by Stripe. You will be
