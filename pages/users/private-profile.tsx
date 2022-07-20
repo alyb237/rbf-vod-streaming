@@ -9,8 +9,8 @@ import {
 } from '../../util/database';
 
 type Props = {
-  user?: User;
-  subscribedUser: Omit<Subscription, 'expiryTimestamp'> & {
+  user: User;
+  subscribedUser?: Omit<Subscription, 'expiryTimestamp'> & {
     expirationDate: string;
   };
 };
@@ -38,17 +38,6 @@ const mainContentWrapper = css`
 `;
 
 export default function Profile(props: Props) {
-  if (!props.user) {
-    return (
-      <>
-        <Head>
-          <title>User not found</title>
-          <meta name="description" content="User not found" />
-        </Head>
-        <h1>404 - User not found 😞 </h1>
-      </>
-    );
-  }
   return (
     <>
       <Head>
@@ -64,7 +53,10 @@ export default function Profile(props: Props) {
             Account: {props.user.lastName},{props.user.firstName}
           </h1>
 
-          <h3>Expiration Date: {props.subscribedUser.expirationDate}</h3>
+          {props.subscribedUser && (
+            <h3>Expiration Date: {props.subscribedUser.expirationDate}</h3>
+          )}
+
           <p>
             Please email me at contact@resonatebody.com at least three days
             before your expiration date. I will then cancel your subscription
@@ -87,14 +79,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
   // console.log('subscribed user info from db', subscribedUser);
 
-  if (user) {
+  if (user && subscribedUser) {
     return {
       props: {
         user: user,
         subscribedUser: subscribedUser,
       },
     };
+  } else if (user) {
+    return {
+      props: {
+        user: user,
+      },
+    };
   }
+
   // if user with session token redirect to private profile once logged in
   return {
     redirect: {
