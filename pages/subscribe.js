@@ -103,16 +103,19 @@ export async function getServerSideProps() {
   // console.log(price2);
 
   // 3. send props to the frontend
-  return {
-    props: {
-      publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
-      productPrices: [
-        {
-          priceId: process.env.PRICE2,
-          amount: price2.unit_amount / 100,
-          image: subscription.images[0],
-        },
-      ],
-    },
-  };
+
+  if (stripeServer) {
+    return {
+      props: {
+        publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
+        productPrices: [
+          {
+            priceId: process.env.PRICE2,
+            amount: price2.unit_amount / 100,
+            image: subscription.images[0],
+          },
+        ],
+      },
+    };
+  }
 }
