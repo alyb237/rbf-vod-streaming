@@ -46,12 +46,7 @@ const videosListStyles = css`
   border-radius: 4px;
   max-height: 40vh;
   max-width: 100%;
-  /* padding: 12px 16px; */
 
-  /* margin: 2px;
-  & + & {
-    margin-top: 10px;
-  } */
   .nameStyles {
     display: flex;
     justify-content: center;
@@ -134,8 +129,11 @@ export default function Browse(props: Props) {
                   <Image src={`/${video.thumbnail}`} width={320} height={180} />
 
                   <div className="nameStyles">
-                    <Link href={`private-video/${video.videoName}`}>
+                    {/* <Link href={`private-video/${video.videoName}`}>
                       {video.videoName}
+                    </Link> */}
+                    <Link href={`private-video/${video.videoName}`}>
+                      <a target="_blank">{video.videoName}</a>
                     </Link>
                   </div>
                 </div>
@@ -178,7 +176,7 @@ export default function Browse(props: Props) {
 
 export async function getServerSideProps() {
   const videos = await getAllVideos();
-  console.log('videos', videos);
+  // console.log('videos', videos);
 
   return {
     props: {

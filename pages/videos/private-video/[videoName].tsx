@@ -16,6 +16,18 @@ type Props = {
 
 const mainContentWrapper = css`
   height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
+
+  .paragraphStyles {
+    width: 50%;
+    align-content: center;
+    color: #fbfbf6;
+  }
 `;
 
 export default function VideoName(props: Props) {
@@ -52,7 +64,7 @@ export default function VideoName(props: Props) {
           }}
         />
         <br />
-        <div>{props.video.descriptionText}</div>
+        <div className="paragraphStyles">{props.video.descriptionText}</div>
       </main>
     </div>
   );
