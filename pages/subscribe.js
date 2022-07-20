@@ -93,9 +93,9 @@ export default function Subscribe(props) {
 export async function getServerSideProps() {
   // 1. connect with stripe
   // auth with stripe server
-
+  console.log(process.env.STRIPE_SECRET_KEY);
   const stripeServer = stripe(process.env.STRIPE_SECRET_KEY);
-  // console.log(stripeServer);
+  console.log(stripeServer);
   // 2. Get price from PRICE env variable
   const price2 = await stripeServer.prices.retrieve(process.env.PRICE2);
   const subscription = await stripeServer.products.retrieve(price2.product);
