@@ -40,10 +40,7 @@ export default function Subscription(props) {
       </p>
 
       <div className="imgWrapper">
-        <img
-          alt="resonate body logo"
-          src={props.image || '/RBF_logo_waves_white.jpg'}
-        />
+        <img alt="resonate body logo" src="/RBF_logo_waves_white.jpg" />
       </div>
     </main>
   );
