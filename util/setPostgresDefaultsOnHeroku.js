@@ -11,7 +11,5 @@ module.exports = function setPostgresDefaultsOnHeroku() {
     process.env.PGDATABASE = database;
     process.env.PGUSERNAME = user;
     process.env.PGPASSWORD = password;
-
-    console.log('checking pghost', process.env.PGHOST);
   }
 };

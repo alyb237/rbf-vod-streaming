@@ -1,6 +1,12 @@
 import camelcaseKeys from 'camelcase-keys';
+import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 import Subscription from '../components/Subscription';
+import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
+
+setPostgresDefaultsOnHeroku();
+
+config();
 
 // Type needed for the connection function below
 declare module globalThis {
