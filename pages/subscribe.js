@@ -66,9 +66,6 @@ export default function Subscribe(props) {
 
     const { session } = await response.json();
 
-    //
-    //
-
     // 2. Redirect customer to url from Checkout session
     stripeClient.redirectToCheckout({ sessionId: session.id }).catch(() => {
       console.log('redirect fails');
@@ -98,10 +95,12 @@ export async function getServerSideProps() {
   // auth with stripe server
 
   const stripeServer = stripe(process.env.STRIPE_SECRET_KEY);
-
+  // console.log(stripeServer);
   // 2. Get price from PRICE env variable
   const price2 = await stripeServer.prices.retrieve(process.env.PRICE2);
   const subscription = await stripeServer.products.retrieve(price2.product);
+  // console.log(subscription);
+  // console.log(price2);
 
   // 3. send props to the frontend
   return {
