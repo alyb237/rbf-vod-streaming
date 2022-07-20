@@ -31,6 +31,7 @@ export default function Subscription(props) {
   return (
     <main css={mainContentWrapper}>
       <h1>Subscription Plan</h1>
+      <h3>Register before subscribing!</h3>
       <p>
         <em>
           This is a recurring monthly payment powered by Stripe. You will be

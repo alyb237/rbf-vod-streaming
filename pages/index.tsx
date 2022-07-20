@@ -97,7 +97,7 @@ export default function Home() {
       <section css={mainSubscribeWrapper}>
         <div css={rainbowContainer}>
           <Link href="/subscribe">
-            <a className="aTagLink">Subscribe and find out more!</a>
+            <a className="aTagLink">Register first and then subscribe!</a>
           </Link>
         </div>
       </section>
