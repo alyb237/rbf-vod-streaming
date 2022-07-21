@@ -14,7 +14,7 @@ Description:
 
 
 
-
+##### Test cards: https://www.memberstack.com/blog/stripe-test-cards
 ##### DrawSQL: https://drawsql.app/student-636/diagrams/users#
 ##### Figma AWS icons: https://www.figma.com/file/n5BDQnLR08N0H8oZsdXDhK/Final-AWS-diagram?node-id=0%3A1 
 
