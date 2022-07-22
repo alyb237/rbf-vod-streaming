@@ -6,15 +6,22 @@ jobs:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
     # Update env variables with your own database credentials
     env:
-      # PGHOST: ${{ secrets.PGHOST }}
-      # PGDATABASE: ${{ secrets.PGDATABASE }}
-      # PGUSERNAME: ${{ secrets.PGUSERNAME }}
-      # PGPASSWORD: ${{ secrets.PASSWORD}}
       PGHOST: localhost
-      PGDATABASE: next_js_example_spring_2022
-      PGUSERNAME: next_js_example_spring_2022
-      PGPASSWORD: next_js_example_spring_2022
-
+      PGDATABASE: next_js_final
+      PGUSERNAME: next_js_final
+      PGPASSWORD: next_js_final
+      BASE_URL: ${{ secrets.BASE_URL }}
+      PAYMENT_METHOD_TYPES: ${{ secrets.PAYMENT_METHOD_TYPES }}
+      PRICE2: ${{ secrets.PRICE2 }}
+      STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+      STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+      VIDEO_1: ${{ secrets.VIDEO_1 }}
+      VIDEO_2: ${{ secrets.VIDEO_2 }}
+      VIDEO_3: ${{ secrets.VIDEO_3 }}
+      VIDEO_4: ${{ secrets.VIDEO_4 }}
+      VIDEO_5: ${{ secrets.VIDEO_5 }}
+      VIDEO_6: ${{ secrets.VIDEO_6 }}
+      VIDEO_7: ${{ secrets.VIDEO_7 }}
     steps:
       - name: Start preinstalled PostgreSQL on Ubuntu
         run: |
@@ -23,17 +30,10 @@ jobs:
 
       - name: Create database user
         run: |
-          sudo -u postgres psql --command="CREATE USER next_js_example_spring_2022 PASSWORD 'next_js_example_spring_2022'" --command="\du"
+          sudo -u postgres psql --command="CREATE USER next_js_final PASSWORD 'next_js_final'" --command="\du"
       - name: Create database and allow user
         run: |
-          sudo -u postgres createdb --owner=next_js_example_spring_2022 next_js_example_spring_2022
-
-      # - name: Create database user
-      #   run: |
-      #     sudo -u postgres psql --command="CREATE USER ${{ secrets.PGUSERNAME }} PASSWORD PGPASSWORD: ${{ secrets.PASSWORD}}" --command="\du"
-      # - name: Create database and allow user
-      #   run: |
-      #     sudo -u postgres createdb --owner= ${{ secrets.PGHOST }} ${{ secrets.PGHOST }}
+          sudo -u postgres createdb --owner=next_js_final next_js_final
 
       - uses: actions/checkout@v2
       # Use the official setup-node action (sets up Node.js):
