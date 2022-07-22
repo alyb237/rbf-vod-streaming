@@ -1,5 +1,4 @@
 import cookie from 'cookie';
-// import cookie from 'cookie';
 import { GetServerSidePropsContext } from 'next';
 import { deleteSessionByToken } from '../util/database';
 
