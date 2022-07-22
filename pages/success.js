@@ -82,7 +82,7 @@ export async function getServerSideProps(ctx) {
   const stripeServer = stripe(process.env.STRIPE_SECRET_KEY);
   const { session_id: sessionId } = ctx.query;
   const session = await stripeServer.checkout.sessions.retrieve(sessionId);
-  console.log('this is the session', session);
+
   const allSubscriptions = await getAllSubscriptions();
 
   const user = await getUserByValidSessionToken(ctx.req.cookies.sessionToken);
@@ -102,9 +102,8 @@ export async function getServerSideProps(ctx) {
       session.id,
       user.id,
     ).catch(() => {
-      console.log('insert into subscription table fails');
+      console.log('insert into subscription');
     });
-    console.log('subscriptions from database', allSubscriptions);
 
     return {
       props: {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const mainContentWrapper = css`
   margin: 0%;
   padding: 0;
-  height: 60vh;
+  height: 65vh;
   display: flex;
   background-color: #222;
   justify-content: space-evenly;

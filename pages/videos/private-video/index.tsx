@@ -129,9 +129,6 @@ export default function Browse(props: Props) {
                   <Image src={`/${video.thumbnail}`} width={320} height={180} />
 
                   <div className="nameStyles">
-                    {/* <Link href={`private-video/${video.videoName}`}>
-                      {video.videoName}
-                    </Link> */}
                     <Link href={`private-video/${video.videoName}`}>
                       <a target="_blank">{video.videoName}</a>
                     </Link>
@@ -144,12 +141,6 @@ export default function Browse(props: Props) {
       </main>
 
       <div css={iframeWrapper}>
-        {/* <h3>
-          <em>
-            **Recommended to open SoundCloud on another tab in order to have
-            volume control**
-          </em>
-        </h3> */}
         <iframe
           title="soundcloud"
           width="100%"

@@ -69,7 +69,7 @@ export default async function handler(
     // get the request body
     const user = req.body;
     // shows in the server terminal
-    console.log(user);
+
     // get the name, email, password
     // user.firstname stays in lowercase
     const firstName = user.firstname;
@@ -83,7 +83,6 @@ export default async function handler(
     // create the user and store in database
     // type is coming from User which was created in the database
     const newUser = await createUser(firstName, lastName, email, hashPassword);
-    console.log('new user: ', newUser);
 
     // TODO create a session for the user
     // 1. get token
