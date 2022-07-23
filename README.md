@@ -5,7 +5,7 @@ ______________________________________________________
 #### A desktop platform where users could subscribe and watch fitness videos online. I created a scalable, distributed architecture that ingests, stores, processes, and delivers video content.
 #### Powered by AWS: S3, Cloudfront, Lambda, and MediaConvert.
 ##### The subscriptions are handled by Stripe and users can view their account billing period. Once the user is subscribed they can stream the videos. Any user can browse the videos list, but only if they are subscribed the videos can be streamed.
-
+------------------------------------------------------
 ### AWS explanation and resources: 
 ------------------------------------------------------
 ![Screenshot of AWS slide one](https://github.com/alyb237/rbf-vod-streaming/blob/main/public/slide1.PNG "AWS slide one info")
