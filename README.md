@@ -10,10 +10,10 @@ Description:
 
 
 
-![Screenshot of AWS slide one](/public/slide1.png " AWS slide one info")
-![Screenshot of AWS slide two](/public/slide2.png " AWS slide two info")
-![Screenshot of AWS slide three](/public/slide3.png " AWS slide three info")
-![Screenshot of AWS slide four](/public/slide4.png " AWS slide four info")
+![Screenshot of AWS slide one](public/slide1.png " AWS slide one info")
+![Screenshot of AWS slide two](public/slide2.png " AWS slide two info")
+![Screenshot of AWS slide three](public/slide3.png " AWS slide three info")
+![Screenshot of AWS slide four](public/slide4.png " AWS slide four info")
 
 
 
