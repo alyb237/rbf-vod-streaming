@@ -35,5 +35,16 @@ ______________________________________________________
 - https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-the-iam-role-in-iam.html
 - https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html#configure-inventory-console
 - https://docs.aws.amazon.com/AmazonS3/latest/userguide/tutorial-s3-batchops-lambda-mediaconvert-video.html#batchops-s3-step4-write-function
+______________________________________________________________________________________________________________________________________________
+#### Pending
+- Improve input field security by  a limited set of allowed characters
+- Signed Cookies on CloudFront
+- Configure S3 bucket to ignore files which have already been converted
+- Search for videos based on muscle groups such as : arms, lower body, abs, etc.
+- Add to watchlist 
+- Set up email payment confirmation within Stripe and a cancel subscription button. 
+- Go from Stripe test mode to live before launching.
+
+
 
 
