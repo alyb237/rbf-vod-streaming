@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getAllVideos, Video } from '../../../util/database';
+import { getVideoNameThumbnailAndId, Video } from '../../../util/database';
 
 const pageWrapper = css`
   background-color: #222;
@@ -31,7 +31,8 @@ const mainContentDiv = css`
     padding: 1em;
   }
 
-  .divContentWrapper {
+  .linkCursorStyle {
+    cursor: pointer;
   }
 `;
 
@@ -106,7 +107,7 @@ const iframeWrapper = css`
 `;
 
 type Props = {
-  videos: Video[];
+  videoInfo: Video[];
 };
 
 export default function Browse(props: Props) {
@@ -122,18 +123,27 @@ export default function Browse(props: Props) {
       </div>
       <main css={mainContentDiv}>
         <div className="divGridBox">
-          {props.videos.map((video) => {
+          {props.videoInfo.map((video) => {
             return (
               <div className="divContentWrapper" key={`videos-${video.id}`}>
-                <div css={videosListStyles}>
-                  <Image src={`/${video.thumbnail}`} width={320} height={180} />
+                <Link
+                  className="linkCursorStyle"
+                  href={`private-video/${video.videoName}`}
+                >
+                  <div css={videosListStyles}>
+                    <Image
+                      src={`/${video.thumbnail}`}
+                      width={320}
+                      height={180}
+                    />
 
-                  <div className="nameStyles">
-                    <Link href={`private-video/${video.videoName}`}>
-                      <a target="_blank">{video.videoName}</a>
-                    </Link>
+                    <div className="nameStyles">
+                      <Link href={`private-video/${video.videoName}`}>
+                        <a target="_blank">{video.videoName}</a>
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })}
@@ -166,12 +176,11 @@ export default function Browse(props: Props) {
 }
 
 export async function getServerSideProps() {
-  const videos = await getAllVideos();
-  // console.log('videos', videos);
+  const videoInfo = await getVideoNameThumbnailAndId();
 
   return {
     props: {
-      videos: videos,
+      videoInfo: videoInfo,
     },
   };
 }

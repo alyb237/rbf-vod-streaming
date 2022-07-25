@@ -2,6 +2,7 @@ import camelcaseKeys from 'camelcase-keys';
 import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 import Subscription from '../components/Subscription';
+import VideoName from '../pages/videos/private-video/[videoName]';
 import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
 
 setPostgresDefaultsOnHeroku();
@@ -320,14 +321,6 @@ export async function getUserWithValidTokenAndSubscription(
   return userSubscribed && camelcaseKeys(userSubscribed);
 }
 
-// export async function getReducedSubscriber(s: Subscription) {
-//   const reducedSubscriber = {
-//     expiryTimestamp: s.expiryTimestamp.toString,
-//     email: s.email,
-//   };
-//   return reducedSubscriber;
-// }
-
 export async function getSubscriptionStatus(userIdFromVideoPage: number) {
   if (!userIdFromVideoPage) return undefined;
   const [status] = await sql`
@@ -337,4 +330,11 @@ export async function getSubscriptionStatus(userIdFromVideoPage: number) {
 
   `;
   return status && status.payment_status;
+}
+
+export async function getVideoNameThumbnailAndId() {
+  const videoInfo = await sql<[Video | undefined]>`
+    SELECT video_name, id, thumbnail FROM videos
+  `;
+  return videoInfo && camelcaseKeys(videoInfo);
 }

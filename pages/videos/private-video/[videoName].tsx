@@ -92,9 +92,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const status = await getSubscriptionStatus(user.id);
 
   if (status === 'paid') {
-    // pending -- check expiration date here as well
-    console.log('you are validated!', status);
-
     if (!videoNameFromUrl || Array.isArray(videoNameFromUrl)) {
       return { props: {} };
     }
