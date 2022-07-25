@@ -20,7 +20,7 @@ ______________________________________________________
 ------------------------------------------------------
 ###### Technoloiges: Next.js, Postgres, Typescript, Unit & E2E-Testing, and CSS-Emotion, AWS S3, Lambda, MediaConvert, and CloudFront. 
 ------------------------------------------------------
-###### Test cards: https://www.memberstack.com/blog/stripe-test-cards
+
 ###### DrawSQL: https://drawsql.app/student-636/diagrams/users#
 ###### Figma AWS icons: https://www.figma.com/file/n5BDQnLR08N0H8oZsdXDhK/Final-AWS-diagram?node-id=0%3A1 
 ###### AWS resources: 
@@ -43,7 +43,7 @@ ________________________________________________________________________________
 - Search for videos based on muscle groups such as : arms, lower body, abs, etc.
 - Add to watchlist 
 - Set up email payment confirmation within Stripe and a cancel subscription button. 
-- Go from Stripe test mode to live before launching.
+
 
 
 
