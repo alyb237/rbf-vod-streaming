@@ -39,6 +39,7 @@ ________________________________________________________________________________
 #### Pending
 - Improve input field security by  a limited set of allowed characters
 - Signed Cookies on CloudFront
+- Change database links to HLS
 - Configure S3 bucket to ignore files which have already been converted
 - Search for videos based on muscle groups such as : arms, lower body, abs, etc.
 - Add to watchlist 
