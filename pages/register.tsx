@@ -140,6 +140,7 @@ export default function Register(props: Props) {
               placeholder="first name"
               value={firstname}
               onChange={(event) => setFirstname(event.currentTarget.value)}
+              maxLength={15}
             />
           </label>
           <br />
@@ -151,6 +152,7 @@ export default function Register(props: Props) {
               placeholder="last name"
               value={lastname}
               onChange={(event) => setLastname(event.currentTarget.value)}
+              maxLength={15}
             />
           </label>
           <br />
@@ -162,6 +164,7 @@ export default function Register(props: Props) {
               placeholder="example@email.com"
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
+              maxLength={20}
             />
           </label>
           <br />
@@ -174,6 +177,7 @@ export default function Register(props: Props) {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
+              maxLength={10}
             />
           </label>
           <br />

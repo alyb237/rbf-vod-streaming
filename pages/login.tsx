@@ -137,6 +137,7 @@ export default function Login(props: Props) {
               placeholder="example@email.com"
               value={email}
               onChange={(event) => setEmail(event.currentTarget.value)}
+              maxLength={20}
             />
           </label>
           <br />
@@ -149,6 +150,7 @@ export default function Login(props: Props) {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.currentTarget.value)}
+              maxLength={10}
             />
           </label>
           <br />
