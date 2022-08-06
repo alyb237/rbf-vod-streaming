@@ -99,8 +99,6 @@ export async function getServerSideProps() {
   // 2. Get price from PRICE env variable
   const price2 = await stripeServer.prices.retrieve(process.env.PRICE2);
   const subscription = await stripeServer.products.retrieve(price2.product);
-  // console.log(subscription);
-  // console.log(price2);
 
   // 3. send props to the frontend
 

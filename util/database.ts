@@ -2,7 +2,6 @@ import camelcaseKeys from 'camelcase-keys';
 import { config } from 'dotenv-safe';
 import postgres from 'postgres';
 import Subscription from '../components/Subscription';
-import VideoName from '../pages/videos/private-video/[videoName]';
 import setPostgresDefaultsOnHeroku from './setPostgresDefaultsOnHeroku';
 
 setPostgresDefaultsOnHeroku();
@@ -338,3 +337,49 @@ export async function getVideoNameThumbnailAndId() {
   `;
   return videoInfo && camelcaseKeys(videoInfo);
 }
+
+export async function addFavorite(
+  userId: number,
+  videoId: number,
+  videoName: string,
+) {
+  const [addFavoriteVideo] = await sql`
+    INSERT INTO
+    favorites
+      (user_id, video_id, video_name)
+    VALUES
+      (${userId}, ${videoId}, ${videoName})
+    RETURNING
+      *
+  `;
+  return camelcaseKeys(addFavoriteVideo);
+}
+
+type FavoriteVideo = {
+  id: number;
+};
+
+export async function checkFavorites(id: number, videoId: number) {
+  const [favoritesCheck] = await sql<[FavoriteVideo | undefined]>`
+    SELECT
+      favorites.id
+    FROM
+      favorites
+    WHERE
+      favorites.user_id = ${id} AND
+      favorites.video_id = ${videoId}
+  `;
+  return favoritesCheck && camelcaseKeys(favoritesCheck);
+}
+
+// export async function getAllFavorites(userId: User['id']) {
+//   if (!userId) return undefined;
+//   const allFavorites = await sql`
+//     SELECT * FROM favorites
+//     WHERE
+//     user_id = ${userId}
+
+//   `;
+//   return allFavorites.map((video) => camelcaseKeys(video));
+//   // return camelcaseKeys(allFavorites);
+// }

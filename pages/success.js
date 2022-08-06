@@ -90,7 +90,7 @@ export async function getServerSideProps(ctx) {
   const idFoundInDbAndSession = allSubscriptions.find(
     (singleIdFromDb) => session.id === singleIdFromDb.checkoutId,
   );
-  // console.log('checking for no match - want undefined', idFoundInDbAndSession);
+
   if (
     idFoundInDbAndSession === undefined &&
     session.payment_status === 'paid'

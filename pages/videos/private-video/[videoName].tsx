@@ -43,6 +43,21 @@ export default function VideoName(props: Props) {
     );
   }
 
+  // handle add to favorites
+  // async function handleAddFavorite() {
+  //   const favoriteResponse = await fetch('/api/favorites', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       user_id: props.user.id,
+  //       video_id: props.video?.id,
+  //       video_name: props.video?.videoName,
+  //     }),
+  //   });
+  // }
+
   return (
     <div>
       <Head>
